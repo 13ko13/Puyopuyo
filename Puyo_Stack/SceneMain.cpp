@@ -8,7 +8,6 @@
 //パズルの切り抜き作業
 
 SceneMain::SceneMain() :
-	m_puzzleGraphHandle(-1),
 	m_pPuzzle(nullptr)
 {
 	
@@ -20,11 +19,8 @@ SceneMain::~SceneMain()
 
 void SceneMain::Init()
 {
-	//グラフィックのロード
-	m_puzzleGraphHandle = LoadGraph("data/Slime_Idle.png");
-
 	m_pPuzzle = new Puzzle();
-	m_pPuzzle->Init(m_puzzleGraphHandle);
+	m_pPuzzle->Init();
 }
 
 void SceneMain::End()

@@ -14,9 +14,6 @@ public:
 	void Draw();
 
 private:
-	//ハンドル関係
-	int m_puzzleGraphHandle;		//パズルのグラフィックハンドル
-
 	//インスタンス
 	Puzzle* m_pPuzzle;
 };

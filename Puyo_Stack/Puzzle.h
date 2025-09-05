@@ -4,31 +4,30 @@
 class Puzzle
 {
 public:
-	Puzzle();
-	~Puzzle();
+    Puzzle();
+    ~Puzzle();
 
-	void Init(int handle);
-	void End();
-	void Update();
-	void Draw();
+    void Init();        // 初期化（位置や色の設定）
+    void Update();      // 更新処理
+    void Draw();        // 描画処理
 
-	void SetPosition(int nx, int ny);	//ぷよのポジションを記憶
+    bool IsAlive() const { return m_alive; }
+    void SetAlive(bool flag) { m_alive = flag; }
 
 private:
-	//ハンドル関係
-	int m_handle;	//グラフィックハンドル
-	
-	//ぷよの色
-	int m_color;		//色ID(0 = 赤,1 = 青, 2 = 緑, 3 = 黄)
+    //ハンドル関係
+    int m_graphHandle;    // 画像ハンドル
+    
+    //アニメーション関係
+    int m_animFrame;       //アニメーションのどの部分か
+    int m_animCounter;    //現在のアニメーションフレーム  
 
-	//アニメーション関係
-	int m_animFrame;	//現在のアニメーション状態
+    //色関係
+    int m_color;          // 色（0=赤, 1=青, 2=緑, …）
 
-	//フラグ関係
-	bool m_alive;			//存在しているか
+    //フラグ関係
+    bool m_alive;         // 生存フラグ
 
-	//インスタンス
-	Vec2 m_pos;			//位置
-	Vec2 m_velocity;	//速度
+    //インスタンス
+    Vec2 m_pos;           // 座標  
 };
-
