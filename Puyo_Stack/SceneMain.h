@@ -1,4 +1,5 @@
 #pragma once
+#include "PuzzlePair.h"
 
 class Puzzle;
 
@@ -16,5 +17,6 @@ public:
 private:
 	//インスタンス
 	Puzzle* m_pPuzzle;
+	PuzzlePair m_puzzlePair;
 };
 

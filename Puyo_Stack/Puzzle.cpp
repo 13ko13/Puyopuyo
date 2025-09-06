@@ -1,17 +1,21 @@
 #include "Puzzle.h"
 #include "DxLib.h"
+#include "Game.h"
+#include "Pad.h"
 
 namespace
 {
 	// 定数定義
-	constexpr int kPuzzleWidth = 80;	//ぷよ1個の横幅
-	constexpr int kPuzzleHeight = 72;	//ぷよ1個の高さ
-	constexpr float kPuzzleSize = 1.5f;
-	constexpr int kAnimNum = 7;		//アニメーション個数
-	constexpr int kAnimWaitFrame = 6;	//アニメーションの速度
-	constexpr int kColors = 4;			//色の数
-	constexpr float kGravity = 2.0f;		//重力
-	const Vec2 kFirstPos = { 200.0f,100.0f };
+	constexpr int kPuzzleWidth = 80;		  //ぷよ1個の横幅
+	constexpr int kPuzzleHeight = 72;		  //ぷよ1個の高さ
+	constexpr float kPuzzleSize = 1.5f;		  //ぷよサイズ
+	constexpr int kAnimNum = 7;			      //アニメーション個数
+	constexpr int kAnimWaitFrame = 6;	      //アニメーションの速度
+	constexpr int kColors = 4;			      //色の数
+	constexpr float kGravity = 2.0f;	      //重力
+	constexpr float kMoveHorizontal = 32.0f;  //横の移動量
+	const Vec2 kFirstPos = { 200.0f,100.0f }; //初期位置
+	const Vec2 kAngleAxis = { 4.0f,4.0f };	  //回転量
 }
 
 Puzzle::Puzzle() :
@@ -26,7 +30,7 @@ Puzzle::Puzzle() :
 
 Puzzle::~Puzzle()
 {
-	// 必要ならリソース解放
+	
 }
 
 void Puzzle::Init()
@@ -36,7 +40,13 @@ void Puzzle::Init()
 	m_alive = true;
 
 	//グラフィックのロード
-	m_graphHandle = LoadGraph("data/Slime_Idle.png");
+	m_graphHandle = LoadGraph("data/Graphic/Slime_Idle.png");
+}
+
+void Puzzle::End()
+{
+	//グラフィックの開放
+	DeleteGraph(m_graphHandle);
 }
 
 void Puzzle::Update()
@@ -52,6 +62,21 @@ void Puzzle::Update()
 
 	// 落下処理
 	m_pos.y += kGravity;  // 下に落ちていく
+
+	//左右移動処理
+	if (Pad::IsTrigger(PAD_INPUT_LEFT))
+	{
+		m_pos.x -= kMoveHorizontal;
+	}
+	else if (Pad::IsTrigger(PAD_INPUT_RIGHT))
+	{
+		m_pos.x += kMoveHorizontal;
+	}
+
+	/*if (m_pos.y >= Game::kScreenHeight)
+	{
+		m_pos.y = Game::kScreenHeight;
+	}*/
 }
 
 void Puzzle::Draw()
@@ -70,8 +95,19 @@ void Puzzle::Draw()
 		static_cast<int>(m_pos.x),
 		static_cast<int>(m_pos.y),
 		srcX, srcY,
-		kPuzzleWidth, kPuzzleHeight,
+		kPuzzleWidth,
+		kPuzzleHeight,
 		kPuzzleSize, 0,
 		m_graphHandle, true
 	);
+}
+
+void Puzzle::SetPos(const Vec2& pos)
+{
+	m_pos = pos;
+}
+
+Vec2 Puzzle::GetPos() const
+{
+	return m_pos;
 }

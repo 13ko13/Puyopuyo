@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "SceneMain.h"
+#include "Pad.h"
 
 namespace
 {
@@ -48,6 +49,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 
 		//ここにゲームの処理などを書く
+		
+		//パッドの入力を受け付け
+		Pad::Update();
+
+		//更新
 		pSceneMain->Update();
 
 		//描画

@@ -8,11 +8,14 @@ public:
     ~Puzzle();
 
     void Init();        // 初期化（位置や色の設定）
+    void End();         //終了処理
     void Update();      // 更新処理
     void Draw();        // 描画処理
 
     bool IsAlive() const { return m_alive; }
     void SetAlive(bool flag) { m_alive = flag; }
+    void SetPos(const Vec2& pos);
+    Vec2 GetPos() const;
 
 private:
     //ハンドル関係
