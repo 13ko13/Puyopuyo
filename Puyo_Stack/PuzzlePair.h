@@ -12,6 +12,8 @@ public:
 	void Update();
 	void Draw();
 	bool IsAlive() const;
+	void RotateRight();	//右回転
+	void RotateLeft();	//左回転
 
 	enum class Rotation
 	{
@@ -26,5 +28,7 @@ public:
 private:
 	Puzzle m_puzzles[2];	//2つのぷよ
 	Vec2 m_offset;			//2つ目のぷよの相対位置(例:上にあるなら)
+	Rotation m_rotation;	//回転状態
+	void UpdateChildPos();	//2つ目のぷよの位置更新
 };
 

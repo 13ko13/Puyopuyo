@@ -1,13 +1,15 @@
 #include "PuzzlePair.h"
 #include "Puzzle.h"
+#include "Pad.h"
+#include "DxLib.h"
 
 namespace
 {
-	constexpr int kPuzzleHeight = 25;	//ぷよ1個の高さ
+	constexpr int kPuzzleSize = 25;	//ぷよ1個の高さ
 }
 
 PuzzlePair::PuzzlePair() :
-	m_offset(0.0f, -kPuzzleHeight)
+	m_offset(0.0f, -kPuzzleSize)
 {
 }
 
@@ -30,6 +32,17 @@ void PuzzlePair::Update()
 	{
 		m_puzzles[i].Update();
 	}
+
+	if(Pad::IsTrigger(PAD_INPUT_X))
+	{
+		RotateRight();
+	}
+	
+	if(Pad::IsTrigger(PAD_INPUT_Y) || 
+		Pad::IsTrigger(PAD_INPUT_1))
+	{
+		RotateLeft();
+	}
 }
 
 void PuzzlePair::Draw()
@@ -43,5 +56,40 @@ void PuzzlePair::Draw()
 bool PuzzlePair::IsAlive() const
 {
 	return m_puzzles[0].IsAlive() || m_puzzles[1].IsAlive();
+}
+
+void PuzzlePair::RotateRight()	//右回転
+{
+	m_rotation = static_cast<Rotation>(
+		(static_cast<int>(m_rotation) + 1) %	//int型に変換して0~3の範囲にする
+		static_cast<int>(Rotation::Count));
+
+	//子ぷよの位置更新
+	UpdateChildPos();
+}
+
+void PuzzlePair::RotateLeft()	//左回転
+{
+	m_rotation = static_cast<Rotation>(
+		(static_cast<int>(m_rotation) - 1 +
+			static_cast<int>(Rotation::Count)) %	//int型に変換して0~3の範囲にする
+		static_cast<int>(Rotation::Count));
+
+	//子ぷよの位置更新
+	UpdateChildPos();
+}
+
+void PuzzlePair::UpdateChildPos()	//2つ目のぷよの位置更新
+{
+	static const Vec2 offsets[] = {
+		{ 0.0f, -kPuzzleSize},	//Up
+		{ kPuzzleSize, 0.0f },	//Right
+		{ 0.0f, kPuzzleSize },	//Down
+		{ -kPuzzleSize, 0.0f}		//Left
+	};
+
+	Vec2 parentPos = m_puzzles[0].GetPos();
+	Vec2 offset = offsets[static_cast<int>(m_rotation)];
+	m_puzzles[1].SetPos(parentPos + offset);
 }
 

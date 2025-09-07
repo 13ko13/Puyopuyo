@@ -22,6 +22,7 @@ void SceneMain::Init()
 	m_pPuzzle = new Puzzle();
 	m_pPuzzle->Init();
 	m_puzzlePair.Init();
+	m_field.Init();
 }
 
 void SceneMain::End()
@@ -32,10 +33,13 @@ void SceneMain::Update()
 {
 	m_pPuzzle->Update();
 	m_puzzlePair.Update();
+	m_field.Update();
+	
 }
 
 void SceneMain::Draw()
 {
 	m_pPuzzle->Draw();
+	m_field.Draw();
 	m_puzzlePair.Draw();
 }

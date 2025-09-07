@@ -15,7 +15,7 @@ namespace
 	constexpr float kGravity = 2.0f;	      //d—Í
 	constexpr float kMoveHorizontal = 32.0f;  //‰¡‚ÌˆÚ“®—Ê
 	const Vec2 kFirstPos = { 200.0f,100.0f }; //‰ŠúˆÊ’u
-	const Vec2 kAngleAxis = { 4.0f,4.0f };	  //‰ñ“]—Ê
+	const Vec2 kAccel = { 0.0f, 3.0f };    //‰Á‘¬“x
 }
 
 Puzzle::Puzzle() :
@@ -73,10 +73,10 @@ void Puzzle::Update()
 		m_pos.x += kMoveHorizontal;
 	}
 
-	/*if (m_pos.y >= Game::kScreenHeight)
+	if (Pad::IsPress(PAD_INPUT_DOWN))
 	{
-		m_pos.y = Game::kScreenHeight;
-	}*/
+		m_pos.y += kAccel.y;
+	}
 }
 
 void Puzzle::Draw()

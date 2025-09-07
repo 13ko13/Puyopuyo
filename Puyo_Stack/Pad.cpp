@@ -34,6 +34,11 @@ namespace Pad
         //現在のフレームに押されていて前回のフレームに押されていない
         if (isNow && !isLast)
         {
+
+#ifdef _DEBUG
+            printfDx("key:%d\n", key);
+#endif // DEBUG
+
             return true;
         }
         return false;
