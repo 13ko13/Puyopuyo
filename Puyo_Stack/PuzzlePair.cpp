@@ -2,6 +2,7 @@
 #include "Puzzle.h"
 #include "Pad.h"
 #include "DxLib.h"
+#include "Field.h"
 
 namespace
 {
@@ -33,12 +34,12 @@ void PuzzlePair::Update()
 		m_puzzles[i].Update();
 	}
 
-	if(Pad::IsTrigger(PAD_INPUT_X))
+	if (Pad::IsTrigger(PAD_INPUT_X))
 	{
 		RotateRight();
 	}
-	
-	if(Pad::IsTrigger(PAD_INPUT_Y) || 
+
+	if (Pad::IsTrigger(PAD_INPUT_Y) ||
 		Pad::IsTrigger(PAD_INPUT_1))
 	{
 		RotateLeft();
@@ -51,6 +52,23 @@ void PuzzlePair::Draw()
 	{
 		m_puzzles[i].Draw();
 	}
+}
+
+bool PuzzlePair::CheckCollision(Field& field)
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		Vec2 pos = m_puzzles[i].GetPos();
+		int gridX = static_cast<int>(pos.x / kPuzzleSize);
+		int gridY = static_cast<int>(pos.y / kPuzzleSize);
+
+		//地面に到達or他のぷよがいる
+		if (gridY >= field::kFieldHeight || field.GetPuzzle(gridX, gridY).IsAlive())
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 bool PuzzlePair::IsAlive() const
@@ -91,5 +109,18 @@ void PuzzlePair::UpdateChildPos()	//2つ目のぷよの位置更新
 	Vec2 parentPos = m_puzzles[0].GetPos();
 	Vec2 offset = offsets[static_cast<int>(m_rotation)];
 	m_puzzles[1].SetPos(parentPos + offset);
+}
+
+void PuzzlePair::LandToField(Field& field) //フィールドに着地させる
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		Vec2 pos = m_puzzles[i].GetPos();
+		int gridX = static_cast<int>(pos.x / field::kFieldWidth);
+		int gridY = static_cast<int>(pos.y / field::kFieldHeight);
+
+		field.SetPuzzle(gridX, gridY, m_puzzles[i]);
+		m_puzzles[i].SetAlive(false); //フィールドに置いたら操作ぷよは消す
+	}
 }
 

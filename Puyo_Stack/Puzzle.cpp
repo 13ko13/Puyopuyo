@@ -13,7 +13,7 @@ namespace
 	constexpr int kAnimWaitFrame = 6;	      //アニメーションの速度
 	constexpr int kColors = 4;			      //色の数
 	constexpr float kGravity = 2.0f;	      //重力
-	constexpr float kMoveHorizontal = 32.0f;  //横の移動量
+	constexpr float kMoveHorizontal = 24.5f;  //横の移動量
 	const Vec2 kFirstPos = { 200.0f,100.0f }; //初期位置
 	const Vec2 kAccel = { 0.0f, 3.0f };    //加速度
 }

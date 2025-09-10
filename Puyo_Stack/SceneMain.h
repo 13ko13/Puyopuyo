@@ -3,6 +3,7 @@
 #include "Field.h"
 
 class Puzzle;
+class PuzzlePair;
 
 class SceneMain
 {
@@ -18,7 +19,7 @@ public:
 private:
 	//インスタンス
 	Puzzle* m_pPuzzle;
-	PuzzlePair m_puzzlePair;
+	PuzzlePair* m_pPuzzlePair;
 	Field m_field;
 };
 

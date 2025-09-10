@@ -1,5 +1,6 @@
 #pragma once
 #include "Puzzle.h"
+#include "Field.h"
 
 class PuzzlePair
 {
@@ -11,9 +12,14 @@ public:
 	void End();
 	void Update();
 	void Draw();
-	bool IsAlive() const;
+
+	//フィールドとの当たり判定 
+	bool CheckCollision( Field& field);	
+	bool IsAlive() const; //どちらかのぷよが生きているか
 	void RotateRight();	//右回転
 	void RotateLeft();	//左回転
+	void LandToField(Field& field); //フィールドに着地させる
+
 
 	enum class Rotation
 	{
