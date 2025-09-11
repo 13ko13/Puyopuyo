@@ -8,13 +8,13 @@ namespace
 	// 定数定義
 	constexpr int kPuzzleWidth = 80;		  //ぷよ1個の横幅
 	constexpr int kPuzzleHeight = 72;		  //ぷよ1個の高さ
-	constexpr float kPuzzleSize = 1.5f;		  //ぷよサイズ
+	constexpr float kPuzzleSize = 2.0f;		  //ぷよサイズ
 	constexpr int kAnimNum = 7;			      //アニメーション個数
 	constexpr int kAnimWaitFrame = 6;	      //アニメーションの速度
 	constexpr int kColors = 4;			      //色の数
 	constexpr float kGravity = 2.0f;	      //重力
-	constexpr float kMoveHorizontal = 24.5f;  //横の移動量
-	const Vec2 kFirstPos = { 200.0f,100.0f }; //初期位置
+	constexpr float kMoveHorizontal = 34.0f;  //横の移動量
+	const Vec2 kFirstPos = { 540.0f,100.0f }; //初期位置
 	const Vec2 kAccel = { 0.0f, 3.0f };    //加速度
 }
 

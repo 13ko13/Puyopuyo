@@ -1,10 +1,12 @@
 #include "Field.h"
 #include "DxLib.h"
+#include "Game.h"
 
 namespace
 {
 	// 定数定義
-	constexpr int kGridSize = 26;		  //グリッド1マスの大きさ
+	constexpr int kGridSize = 32;		  //グリッド1マスの大きさ
+	constexpr int kPuzzleSize = 32;		  //ぷよ1個の大きさ
 }
 
 Field::Field()
@@ -48,13 +50,14 @@ void Field::Draw()
 	{
 		for(int x = 0; x < field::kFieldWidth; ++x)
 		{
-			int px = x * kGridSize;
-			int py = y * kGridSize;
+			int px =( x * kGridSize ) + Game::kScreenWidth * 0.4;
+			int py = y * kGridSize - 35 ;
 
+			//グリッド枠線を描画
 			//グリッド枠線を描画
 			DrawBox(px, py, px +kGridSize, py + kGridSize, GetColor(200, 200, 200), false);
 
-			Vec2 drawPos = Vec2(x * 25.0f, y + 25.0f); //ぷよサイズに合わせて調整
+			Vec2 drawPos = Vec2(x * kPuzzleSize, y * kPuzzleSize); //ぷよサイズに合わせて調整
 			m_grid[y][x].SetPos(drawPos);
 			m_grid[y][x].Draw();
 		}

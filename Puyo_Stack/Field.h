@@ -4,7 +4,7 @@
 namespace field
 {
 	constexpr int kFieldWidth = 6;	//フィールドの横幅
-	constexpr int kFieldHeight = 29;	//フィールドの高さ
+	constexpr int kFieldHeight = 23;	//フィールドの高さ
 }
 
 class Field

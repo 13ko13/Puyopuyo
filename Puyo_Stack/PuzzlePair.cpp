@@ -6,7 +6,7 @@
 
 namespace
 {
-	constexpr int kPuzzleSize = 25;	//ぷよ1個の高さ
+	constexpr int kPuzzleSize = 32;	//ぷよ1個の高さ
 }
 
 PuzzlePair::PuzzlePair() :
@@ -63,7 +63,7 @@ bool PuzzlePair::CheckCollision(Field& field)
 		int gridY = static_cast<int>(pos.y / kPuzzleSize);
 
 		//地面に到達or他のぷよがいる
-		if (gridY >= field::kFieldHeight || field.GetPuzzle(gridX, gridY).IsAlive())
+		if (gridY >= field::kFieldHeight  || field.GetPuzzle(gridX, gridY).IsAlive())
 		{
 			return true;
 		}
@@ -116,8 +116,8 @@ void PuzzlePair::LandToField(Field& field) //フィールドに着地させる
 	for (int i = 0; i < 2; ++i)
 	{
 		Vec2 pos = m_puzzles[i].GetPos();
-		int gridX = static_cast<int>(pos.x / field::kFieldWidth);
-		int gridY = static_cast<int>(pos.y / field::kFieldHeight);
+		int gridX = static_cast<int>(pos.x / kPuzzleSize);
+		int gridY = static_cast<int>(pos.y / kPuzzleSize);
 
 		field.SetPuzzle(gridX, gridY, m_puzzles[i]);
 		m_puzzles[i].SetAlive(false); //フィールドに置いたら操作ぷよは消す
