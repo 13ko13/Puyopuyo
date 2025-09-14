@@ -44,25 +44,28 @@ void Field::Update()
 	}
 }
 
+
 void Field::Draw()
 {
-	for (int y = 0; y < field::kFieldHeight; ++y)
-	{
-		for(int x = 0; x < field::kFieldWidth; ++x)
-		{
-			int px =( x * kGridSize ) + Game::kScreenWidth * 0.4;
-			int py = y * kGridSize - 35 ;
+    for (int y = 0; y < field::kFieldHeight; ++y)
+    {
+        for (int x = 0; x < field::kFieldWidth; ++x)
+        {
+            int px = (x * kGridSize) + Game::kScreenWidth * 0.4;
+            int py = y * kGridSize - 35;
 
-			//ƒOƒŠƒbƒh˜gü‚ð•`‰æ
-			//ƒOƒŠƒbƒh˜gü‚ð•`‰æ
-			DrawBox(px, py, px +kGridSize, py + kGridSize, GetColor(200, 200, 200), false);
+            // ƒOƒŠƒbƒh˜gü‚ð•`‰æ
+            DrawBox(px, py, px + kGridSize, py + kGridSize, GetColor(200, 200, 200), false);
 
-			Vec2 drawPos = Vec2(x * kPuzzleSize, y * kPuzzleSize); //‚Õ‚æƒTƒCƒY‚É‡‚í‚¹‚Ä’²®
-			m_grid[y][x].SetPos(drawPos);
-			m_grid[y][x].Draw();
-		}
-	}
+            // ‚Õ‚æ‚ª¶‚«‚Ä‚¢‚é‚È‚ç•`‰æ
+            if (m_grid[y][x].IsAlive())
+            {
+				DrawGraph(x * kPuzzleSize, y * kPuzzleSize, m_grid[y][x].GetGraphHandle(), TRUE);
+            }
+        }
+    }
 }
+
 
 void Field::SetPuzzle(int x, int y, const Puzzle& puzzle)
 {

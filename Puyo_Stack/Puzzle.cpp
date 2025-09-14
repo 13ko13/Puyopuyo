@@ -22,7 +22,7 @@ Puzzle::Puzzle() :
 	m_graphHandle(-1),
 	m_pos(0.0f, 0.0f),
 	m_color(0),
-	m_alive(false),
+	m_alive(true),
 	m_animFrame(0),
 	m_animCounter(0)
 {
@@ -111,3 +111,5 @@ Vec2 Puzzle::GetPos() const
 {
 	return m_pos;
 }
+
+

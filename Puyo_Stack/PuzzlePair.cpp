@@ -120,7 +120,7 @@ void PuzzlePair::LandToField(Field& field) //フィールドに着地させる
 		int gridY = static_cast<int>(pos.y / kPuzzleSize);
 
 		field.SetPuzzle(gridX, gridY, m_puzzles[i]);
-		m_puzzles[i].SetAlive(false); //フィールドに置いたら操作ぷよは消す
+		//m_puzzles[i].SetAlive(false); //フィールドに置いたら操作ぷよは消す
 	}
 }
 

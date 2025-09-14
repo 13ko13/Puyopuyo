@@ -16,6 +16,7 @@ public:
     void SetAlive(bool flag) { m_alive = flag; }
     void SetPos(const Vec2& pos);
     Vec2 GetPos() const;
+	int GetGraphHandle() const { return m_graphHandle; }
 
 private:
     //ƒnƒ“ƒhƒ‹ŠÖŒW
