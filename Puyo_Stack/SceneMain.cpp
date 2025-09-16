@@ -42,7 +42,7 @@ void SceneMain::Update()
 	if (m_pPuzzlePair->CheckCollision(m_field))
 	{
 		m_pPuzzlePair->LandToField(m_field);
-		m_pPuzzlePair->Init(); //新しいペアを生成
+		//m_pPuzzlePair->Init(); //新しいペアを生成
 	}
 	
 }

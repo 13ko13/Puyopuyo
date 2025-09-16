@@ -32,6 +32,8 @@ public:
 	};
 
 private:
+	bool m_isCollision();
+
 	Puzzle m_puzzles[2];	//2‚Â‚Ì‚Õ‚æ
 	Vec2 m_offset;			//2‚Â–Ú‚Ì‚Õ‚æ‚Ì‘Š‘ÎˆÊ’u(—á:ã‚É‚ ‚é‚È‚ç)
 	Rotation m_rotation;	//‰ñ“]ó‘Ô

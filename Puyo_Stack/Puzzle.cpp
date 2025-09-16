@@ -11,7 +11,7 @@ namespace
 	constexpr float kPuzzleSize = 2.0f;		  //ぷよサイズ
 	constexpr int kAnimNum = 7;			      //アニメーション個数
 	constexpr int kAnimWaitFrame = 6;	      //アニメーションの速度
-	constexpr int kColors = 4;			      //色の数
+	constexpr int kColors = 2;			      //色の数
 	constexpr float kGravity = 2.0f;	      //重力
 	constexpr float kMoveHorizontal = 34.0f;  //横の移動量
 	const Vec2 kFirstPos = { 540.0f,100.0f }; //初期位置
